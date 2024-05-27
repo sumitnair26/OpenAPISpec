@@ -6,14 +6,15 @@ const port = 3000;
 app.use(express.json());
 
 let users = [
-    { id: 1, name: 'John Doe' },
-    { id: 2, name: 'Jane Doe' }
+    { id: 1, name: 'Sumit Nair' },
+    { id: 2, name: 'Sukesh Nair' }
 ];
 
 app.get('/users', (req, res) => {
     const { name } = req.query;
 
     if (name) {
+        //@ts-ignore
         const filteredUsers = users.filter(user => user.name.toLowerCase().includes(name.toLowerCase()));
         res.json(filteredUsers);
     } else {
