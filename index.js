@@ -4,12 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const openapispec_1 = require("./openapispec");
 const app = (0, express_1.default)();
 const port = 3000;
 app.use(express_1.default.json());
 let users = [
-    { id: 1, name: 'John Doe' },
-    { id: 2, name: 'Jane Doe' }
+    { id: 1, name: 'Sumit Nair' },
+    { id: 2, name: 'Sukesh Nair' }
 ];
 app.get('/users', (req, res) => {
     const { name } = req.query;
@@ -22,6 +24,7 @@ app.get('/users', (req, res) => {
         res.json(users);
     }
 });
+app.use('/documentation', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(openapispec_1.openapiSpec));
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
